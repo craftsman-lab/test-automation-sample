@@ -26,18 +26,18 @@ public class TextEditorModule extends AbstractModule {
 
         bind(Assertor.class).annotatedWith(AssertProviders.assertProvider(JUnit)).to(JUnitAssertor.class);
         bind(Assertor.class).annotatedWith(AssertProviders.assertProvider(TestNG)).to(TestNGAssertor.class);
-//        AnnotatedElement.
 
-        bind(String.class).annotatedWith(Names.named("JDBC")).toInstance("jdbc:mysql://localhost/pizza");
-        //bindConstant().annotatedWith(AssertProviders.assertProvider(Other)).to("jdbc:mysql://localhost/pizza");
-        //final Context context = new Context("test data");
-//        bind(Context.class).annotatedWith(AssertProviders.assertProvider(JDBC)).toInstance(context);
-//        bindConstant().annotatedWith(AssertProviders.assertProvider(JDBC)).to(Context.class);
+        Context context = new Context("test data");
+
+        bind(Context.class).annotatedWith(Names.named("Context")).toInstance(context);
+
+        bindConstant().annotatedWith(Names.named("JDBC URL")).to("jdbc:mysql://localhost/pizza");
+        //bind(String.class).annotatedWith(AssertProviders.assertProvider(JDBC)).toInstance("jdbc:mysql://localhost/pizza111");
         bind(SampleProvider.class).toProvider(SampleClassProvider.class);
     }
 
-//    @Provides //@UseJUnit
-//    public SampleProvider provideSampleProvider(@Named("JDBC") String dbUrl ) {
+//    @Provides @DbAction
+//    public SampleProvider provideSampleProvider(@Named("JDBC URL") String dbUrl) {
 //        //String dbUrl = "jdbc:mysql://localhost:5326/emp";
 //        String user = "user";
 //        SampleProvider sampleProvider = new SampleProviderImp(dbUrl, user);

@@ -9,6 +9,8 @@ import contract.Assertor;
 import contract.SampleProvider;
 import contract.SpellChecker;
 
+import static annotation.Provider.TestNG;
+
 
 public class TextEditor {
     private SpellChecker spellChecker;
@@ -18,20 +20,21 @@ public class TextEditor {
     @Inject
     public TextEditor(
             SpellChecker spellChecker,
+            //@Named("TestNG") Assertor assertor,
+            //@UseTestNG Assertor assertor,
+            //@DbAction SampleProvider sampleProvider,
             SampleProvider sampleProvider,
-            //@AssertProvider(Provider.JDBC) Context  jdbc,
-            @AssertProvider(Provider.JUnit) Assertor assertorJUnit,
-            @AssertProvider(Provider.TestNG) Assertor assertorTestNG) {
+            @Named("Context") Context context1,
+            @Named("Context") Context context2,
+            @AssertProvider(TestNG) Assertor assertor) {
         this.spellChecker = spellChecker;
-        this.assertorJUnit = assertorJUnit;
-        this.assertorTestNG = assertorTestNG;
-        //System.out.println(jdbc.hashCode());
-
         sampleProvider.someAction();
+        //System.out.println(context1.hashCode());
+        //System.out.println(context2.hashCode());
     }
     public void makeSpellCheck() {
         spellChecker.checkSpelling();
-        assertorJUnit.equal(1,1);
-        assertorTestNG.equal(1,1);
+//        assertorJUnit.equal(1,1);
+//        assertorTestNG.equal(1,1);
     }
 }
