@@ -4,13 +4,11 @@ import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import contract.Assertor;
+import contract.DatabaseAccess;
 import contract.SampleProvider;
 import contract.SpellChecker;
 import domain.Context;
-import implementation.JUnitAssertor;
-import implementation.SampleProviderImp;
-import implementation.SpellCheckerImpl;
-import implementation.TestNGAssertor;
+import implementation.*;
 
 import java.lang.reflect.AnnotatedElement;
 
@@ -34,6 +32,13 @@ public class TextEditorModule extends AbstractModule {
         bindConstant().annotatedWith(Names.named("JDBC URL")).to("jdbc:mysql://localhost/pizza");
         //bind(String.class).annotatedWith(AssertProviders.assertProvider(JDBC)).toInstance("jdbc:mysql://localhost/pizza111");
         bind(SampleProvider.class).toProvider(SampleClassProvider.class);
+
+        //bind(DatabaseAccess.class).to(DatabaseAccessImp.class);
+        try {
+            bind(DatabaseAccess.class).toConstructor(DatabaseAccessImp.class.getConstructor(String.class));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 
 //    @Provides @DbAction

@@ -6,6 +6,7 @@ import annotation.UseJUnit;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import contract.Assertor;
+import contract.DatabaseAccess;
 import contract.SampleProvider;
 import contract.SpellChecker;
 
@@ -23,12 +24,14 @@ public class TextEditor {
             //@Named("TestNG") Assertor assertor,
             //@UseTestNG Assertor assertor,
             //@DbAction SampleProvider sampleProvider,
+            DatabaseAccess databaseAccess,
             SampleProvider sampleProvider,
             @Named("Context") Context context1,
             @Named("Context") Context context2,
             @AssertProvider(TestNG) Assertor assertor) {
         this.spellChecker = spellChecker;
         sampleProvider.someAction();
+        databaseAccess.someAction();
         //System.out.println(context1.hashCode());
         //System.out.println(context2.hashCode());
     }
