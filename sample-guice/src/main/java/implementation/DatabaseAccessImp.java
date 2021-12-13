@@ -8,11 +8,12 @@ public class DatabaseAccessImp implements DatabaseAccess {
 
     private String dbUrl = "[empty]";
 
-    //@Inject
+    @Inject
     public DatabaseAccessImp() {
     }
 
-    public DatabaseAccessImp(@Named("JDBC URL") String dbUrl) {
+    //public DatabaseAccessImp(@Named("JDBC URL") String dbUrl) {
+    public DatabaseAccessImp(String dbUrl) {
         this.dbUrl = dbUrl;
     }
 
